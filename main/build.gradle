@@ -7,10 +7,12 @@
  * user guide available at https://docs.gradle.org/2.14/userguide/tutorial_java_projects.html
  */
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-
 dependencies {
     compile project(':projectA')
     compile project(':projectB')
+}
+task runJar(type: JavaExec) {
+   classpath = files(['build/libs/projectA.jar','build/libs/projectB.jar'])
+   classpath += sourceSets.main.runtimeClasspath
+   main = 'main.Application'
 }
